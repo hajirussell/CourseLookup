@@ -84,7 +84,9 @@ let courseData = [{
 
 window.onload = function () {
     loadCourses();
-    // showDetailsBtn.onclick = showDetailsBtnClicked();
+
+    const showDetailsBtn = document.getElementById("showDetailsBtn");
+    showDetailsBtn.onclick = showDetailsBtnClicked;
 }
 
 function loadCourses() {
@@ -102,12 +104,71 @@ function loadCourses() {
     }
 }
 
-// let courseDataToFind = "The option Selected"
+function showDetailsBtnClicked() {
+    //erase previous info on click
+    const courseIdPara = document.getElementById("courseIdPara");
+    courseIdPara.innerHTML = " ";
+
+    const instructorPara = document.getElementById("instructorPara");
+    instructorPara.innerHTML = " ";
+
+    const locationPara = document.getElementById("locationPara");
+    locationPara.innerHTML = " ";
+
+    const startDatePara = document.getElementById("startDatePara");
+    startDatePara.innerHTML = " ";
+
+    const feePara = document.getElementById("feePara");
+    feePara.innerHTML = " ";
+
+    //get the course information from the dropdown list
+    const selectCourseOption = document.getElementById("selectCourseOption");
+    let selectedCourse = selectCourseOption.value;
+
+    //making sure that the select one option is not selected
+    if (selectedCourse == " ") {
+        alert("Please select a valid course.");
+        return;
+    }
+
+    //finding the course in the array of course data
+    let matchingCourse = courseData.find(arrayElement => arrayElement.CourseId == selectedCourse);
+
+    //display the data
+    courseIdPara.innerHTML = matchingCourse.CourseId;
+    instructorPara.innerHTML = matchingCourse.Instructor;
+    locationPara.innerHTML = matchingCourse.Location;
+    startDatePara.innerHTML = matchingCourse.StartDate;
+    feePara.innerHTML = matchingCourse.Fee;
+}
+
+
 
 // function showDetailsBtnClicked() {
-//     const courseDetailsDisplay = document.getElementById("courseDetailsDisplay");
-//     let foundCourse = courseData.find(arrayElement => arrayElement.Title == courseDataToFind);
+//     //erase previous trail info
+//     const descriptionPara = document.getElementById("descriptionPara");
+//     descriptionPara.innerHTML = " "
+
+//     const lengthPara = document.getElementById("lengthPara");
+//     lengthPara.innerHTML = " "
+
+//     //get the hike selected from the dropdown list
+//     const hikesDropdown = document.getElementById("hikesDropdown");
+//     let selectedHikeId = hikesDropdown.value;
+
+//     //testing to see if the user has selected "select one"
+//     if (selectedHikeId == " ") {
+//         alert("Please select a hike first.");
+//         return;
+//     }
+
+//     //go find that hike in the array of hiking data
+//     let matchingHike = hikes.find(arrayElement => arrayElement.id == selectedHikeId);
+
+//     //display the specific matching hiking data below the button in the details area
+
+//     descriptionPara.innerHTML = matchingHike.description;
 
 
-
+//     lengthPara.innerHTML = "Length: " + selectedHikeId.length;
 // }
